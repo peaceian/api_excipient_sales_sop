@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API / Excipient B2B 業務客戶應對 SOP</title>
+  <style>
+    :root {
+      --bg: #eef5f7;
+      --card: rgba(255,255,255,0.82);
+      --primary: #0f5f6b;
+      --secondary: #3aa7a3;
+      --accent: #7cc6b2;
+      --text: #1d2b2f;
+      --muted: #66777d;
+      --line: rgba(15,95,107,0.14);
+      --warning: #b46b28;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(124,198,178,0.36), transparent 26%),
+        radial-gradient(circle at 90% 20%, rgba(58,167,163,0.22), transparent 28%),
+        linear-gradient(135deg, #eef5f7 0%, #dcebed 100%);
+      min-height: 100vh;
+      padding: 32px 16px;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255,255,255,0.88), rgba(233,247,246,0.76));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 36px;
+      box-shadow: 0 20px 50px rgba(23,74,80,0.12);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -45px;
+      bottom: -50px;
+      width: 210px;
+      height: 120px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(58,167,163,0.25), rgba(124,198,178,0.12));
+      transform: rotate(-20deg);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(58,167,163,0.12);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 5vw, 48px);
+      line-height: 1.15;
+      color: var(--primary);
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      margin-top: 16px;
+      max-width: 760px;
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .principle {
+      margin-top: 22px;
+      padding: 18px 20px;
+      border-left: 5px solid var(--secondary);
+      background: rgba(255,255,255,0.72);
+      border-radius: 18px;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .card {
+      grid-column: span 12;
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 14px 34px rgba(23,74,80,0.08);
+    }
+
+    .half {
+      grid-column: span 6;
+    }
+
+    .third {
+      grid-column: span 4;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    p {
+      line-height: 1.8;
+      margin: 8px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 16px;
+      font-size: 15px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--primary);
+      background: rgba(58,167,163,0.12);
+      font-weight: 800;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 14px;
+    }
+
+    .step {
+      position: relative;
+      padding: 18px 18px 18px 66px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.64);
+      border: 1px solid var(--line);
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(58,167,163,0.12);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .quote {
+      padding: 14px 16px;
+      background: rgba(15,95,107,0.07);
+      border-radius: 14px;
+      color: var(--primary);
+      font-weight: 700;
+      line-height: 1.7;
+      margin: 10px 0;
+    }
+
+    .warning {
+      border-left: 5px solid var(--warning);
+      background: rgba(255,249,241,0.8);
+      color: #6d421b;
+      padding: 16px 18px;
+      border-radius: 16px;
+      font-weight: 700;
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .flow span {
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid var(--line);
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .arrow {
+      color: var(--secondary);
+      font-weight: 900;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      margin: 28px 0 6px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 820px) {
+      body {
+        padding: 18px 10px;
+      }
+
+      .hero {
+        padding: 26px 20px;
+        border-radius: 22px;
+      }
+
+      .half, .third {
+        grid-column: span 12;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      table {
+        font-size: 14px;
+      }
+
+      th, td {
+        padding: 11px 10px;
+      }
+
+      .flow {
+        display: grid;
+      }
+
+      .arrow {
+        display: none;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+
+      .hero, .card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      .container {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <section class="hero">
+      <div class="tag">Pharma B2B Sales SOP｜API・Excipient・CDMO</div>
+      <h1>API / Excipient 客戶應對 SOP</h1>
+      <p class="subtitle">
+        適合剛進入醫藥原料代理、API、賦形劑、CDMO 技術型業務的新手使用。
+        核心目標不是馬上知道所有答案，而是建立可信任、可追蹤、可回覆的專業流程。
+      </p>
+      <div class="principle">核心原則：先聽，再問，再答。客戶要的是可靠窗口，不是百科全書。</div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Step 1｜先判斷客戶角色</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>客戶角色</th>
+              <th>常問問題</th>
+              <th>真正關心</th>
+              <th>你的應對重點</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>RD 研發</td>
+              <td>原料特性、應用、替代品、配方建議</td>
+              <td>能不能做得出來</td>
+              <td>先問劑型、用途、目前困難</td>
+            </tr>
+            <tr>
+              <td>QA / QC</td>
+              <td>GMP、CoA、規格、稽核、變更管理</td>
+              <td>品質與供應是否穩定</td>
+              <td>確認文件版本與原廠品質資料</td>
+            </tr>
+            <tr>
+              <td>RA 法規</td>
+              <td>DMF、CEP、LOA、ASMF、註冊支援</td>
+              <td>能不能申請藥證</td>
+              <td>確認申請市場、文件可提供程度</td>
+            </tr>
+            <tr>
+              <td>採購</td>
+              <td>價格、MOQ、交期、付款條件</td>
+              <td>能不能買、成本是否合理</td>
+              <td>確認需求量、時程、是否已通過內部評估</td>
+            </tr>
+            <tr>
+              <td>CDMO / PM</td>
+              <td>技術能力、專案時程、批量、製程支援</td>
+              <td>專案能不能順利執行</td>
+              <td>釐清階段、規模、技術缺口</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card half">
+        <h2>Step 2｜先問 3 個問題</h2>
+        <div class="steps">
+          <div class="step">
+            <h3>目前是哪個階段？</h3>
+            <p>新產品開發、第二供應商評估、量產供貨、法規申請、還是品質問題處理？</p>
+          </div>
+          <div class="step">
+            <h3>請問實際用途是什麼？</h3>
+            <p>錠劑、膠囊、ODT、注射劑、外用、保健食品，或僅是研發測試？</p>
+          </div>
+          <div class="step">
+            <h3>目前最大的困擾是什麼？</h3>
+            <p>價格、缺貨、法規文件、技術問題、品質問題、供應商替代，或時程壓力？</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card half">
+        <h2>Step 3｜問題分類與回應方式</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>類型</th>
+              <th>例子</th>
+              <th>標準回應</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>文件類</td>
+              <td>DMF、CEP、GMP、CoA、SDS</td>
+              <td>我確認最新版本後提供給您。</td>
+            </tr>
+            <tr>
+              <td>規格類</td>
+              <td>粒徑、水分、Assay、殘留溶劑</td>
+              <td>我查閱最新規格書後回覆您。</td>
+            </tr>
+            <tr>
+              <td>技術類</td>
+              <td>壓錠性、溶解度、相容性、賦形劑選擇</td>
+              <td>我先了解應用情境，再與原廠確認。</td>
+            </tr>
+            <tr>
+              <td>商務類</td>
+              <td>價格、MOQ、Lead time、樣品</td>
+              <td>我確認庫存與交期後提供報價資訊。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card third">
+        <h2>不知道時怎麼說</h2>
+        <div class="quote">「這部分我想確認一下最新資料，再回覆您。」</div>
+        <div class="quote">「我不希望提供不完整資訊，我先與原廠確認。」</div>
+        <div class="quote">「不同應用條件可能會影響結果，我先了解您的情況。」</div>
+        <div class="quote">「我今天或明天整理後回覆您。」</div>
+      </div>
+
+      <div class="card third">
+        <h2>Step 4｜找對內部資源</h2>
+        <table>
+          <tbody>
+            <tr><td>DMF / CEP / LOA</td><td>RA / 原廠 RA</td></tr>
+            <tr><td>CoA / 規格</td><td>QA / PM</td></tr>
+            <tr><td>GMP / 稽核</td><td>QA / 原廠</td></tr>
+            <tr><td>Excipient 應用</td><td>原廠技術團隊</td></tr>
+            <tr><td>API 技術問題</td><td>Technical Support</td></tr>
+            <tr><td>價格 / MOQ</td><td>主管 / 採購</td></tr>
+            <tr><td>CDMO 能力</td><td>PM / BD</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card third">
+        <h2>Step 5｜24 小時回覆原則</h2>
+        <p>即使還沒有完整答案，也要回覆進度，避免客戶覺得你消失。</p>
+        <div class="quote">「目前已向原廠確認，預計明天下午提供完整資料。」</div>
+        <div class="warning">重點：不知道不是問題；沒有追蹤、沒有回覆，才會失去信任。</div>
+      </div>
+
+      <div class="card">
+        <h2>完整處理流程</h2>
+        <div class="flow">
+          <span>接收問題</span>
+          <b class="arrow">→</b>
+          <span>確認角色</span>
+          <b class="arrow">→</b>
+          <span>釐清階段與用途</span>
+          <b class="arrow">→</b>
+          <span>分類問題</span>
+          <b class="arrow">→</b>
+          <span>查文件 / 找原廠</span>
+          <b class="arrow">→</b>
+          <span>回覆進度</span>
+          <b class="arrow">→</b>
+          <span>整理成 FAQ</span>
+        </div>
+      </div>
+
+      <div class="card half">
+        <h2>拜訪後 30 分鐘內記錄</h2>
+        <div class="chips">
+          <span class="chip">客戶產品線</span>
+          <span class="chip">真正決策者</span>
+          <span class="chip">目前困難</span>
+          <span class="chip">需要文件</span>
+          <span class="chip">下一步</span>
+          <span class="chip">下次聯絡時間</span>
+        </div>
+      </div>
+
+      <div class="card half">
+        <h2>建立自己的知識庫</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>日期</th>
+              <th>客戶</th>
+              <th>問題</th>
+              <th>答案</th>
+              <th>來源</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>YYYY/MM/DD</td>
+              <td>公司 / 部門</td>
+              <td>客戶詢問內容</td>
+              <td>確認後的答案</td>
+              <td>CoA / TDS / 原廠信件</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>菜鳥業務黃金原則</h2>
+        <div class="principle">客戶不會因為你不知道某個 API 的 polymorph 就不合作；但會因為你亂回答一次，而永遠不再相信你。</div>
+      </div>
+    </section>
+
+    <div class="footer">API / Excipient Technical Sales SOP｜For internal learning use</div>
+  </main>
+</body>
+</html>
